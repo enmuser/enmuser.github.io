@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: enmuserのblog
-subtitle: '专注技术和不正经的事'
+title: 诗意码者
+subtitle: '专注技术和有点不正经的事'
 description: '慢慢写'
 keywords:
-author: John Doe
-language: en
+author: 苏小南
+language: zh-Hans
 timezone: ''
 
 # URL
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
