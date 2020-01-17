@@ -9,7 +9,7 @@ description: '慢慢写'
 keywords:
 author: 苏小南
 language: zh-Hans
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
