@@ -93,10 +93,10 @@ if(buf.hasRemaining()){
 
    本地IO:  `FileInputStream`/`FileOutputStream `/`RandomAccessFile`
 
-​       网络IO:  `Socket` /` ServerSocket`/` DatagramSocket`
+   网络IO:  `Socket` /` ServerSocket`/` DatagramSocket`
 
-    2. **JDK1.7 在NIO.2 针对各通道提供的静态方法open()**
-       3. **JDK1.7 在NIO.2 的Files工具类中的newByteChannel()**
+2. **JDK1.7 在NIO.2 针对各通道提供的静态方法open()**
+3. **JDK1.7 在NIO.2 的Files工具类中的newByteChannel()**
 
 ```java
 FileInputStream fis = null;
@@ -210,18 +210,18 @@ outChannel.close();
 
 - 聚集写入(Gathering Writes) 将多个缓冲区中的数据聚集到通道中 
 ```java
-        RandomAccessFile raf = new RandomAccessFile("1.txt","rw");
-        FileChannel channel1 = raf.getChannel();
+RandomAccessFile raf = new RandomAccessFile("1.txt","rw");
+FileChannel channel1 = raf.getChannel();
 
-        ByteBuffer buf1 = ByteBuffer.allocate(500);
-        ByteBuffer buf2 = ByteBuffer.allocate(500);
-        ByteBuffer[] byteBuffers = {buf1,buf2};
-        //分散读取
-        channel1.read(byteBuffers);
-        for(ByteBuffer buf : byteBuffers)
-        {
-            buf.flip();
-        }
+ByteBuffer buf1 = ByteBuffer.allocate(500);
+ByteBuffer buf2 = ByteBuffer.allocate(500);
+ByteBuffer[] byteBuffers = {buf1,buf2};
+//分散读取
+channel1.read(byteBuffers);
+for(ByteBuffer buf : byteBuffers)
+{
+   buf.flip();
+}
 /** System.out.println(new String(byteBuffers[0].array(),0,byteBuffers[0].limit()));
 System.out.println("--------------------------------------------------------");
 System.out.println(new String(byteBuffers[1].array(),0,byteBuffers[0].limit()));*/
