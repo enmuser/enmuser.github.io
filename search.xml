@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java8之Lambda</title>
+    <url>/2020/01/19/Java8%E4%B9%8BLambda/</url>
+    <content><![CDATA[<p>Lambda表达式的基础语法：</p>
+<p>Lambda表达式需要“函数式接口”的支持；</p>
+<p>函数式接口：接口中只有一个抽象方法的接口，称为函数式的接口，可以使用注解<code>@FunctionalInterface</code> 修饰，用来检查是否是函数式接口</p>
+<p>Java8引入的一个新的操作符 “-&gt;” 该操作符成为箭头操作符或者Lambda操作符，该操作符将Lam表达表达式分为两个部分：</p>
+<p><code>左侧：Lambda 表达式的参数列表</code>    -&gt;   <code>右侧：Lambda 表达式中所需执行的功能  即Lambda体</code></p>
+<h5 id="Lambda的语法格式"><a href="#Lambda的语法格式" class="headerlink" title="Lambda的语法格式"></a>Lambda的语法格式</h5><h6 id="语法格式一：无参数，无返回值"><a href="#语法格式一：无参数，无返回值" class="headerlink" title="语法格式一：无参数，无返回值"></a>语法格式一：无参数，无返回值</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Runnable rb = <span class="keyword">new</span> Runnable()</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         System.out.println(<span class="string">"匿名内部类"</span>);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> rb.run();</span><br><span class="line"></span><br><span class="line"> Runnable rab = () -&gt; System.out.println(<span class="string">"Hello Lambda"</span>);</span><br><span class="line"> rab.run();</span><br></pre></td></tr></table></figure>
+
+<h6 id="语法格式二：有一个参数，无返回值-如果有一个参数，参数的括号可以不写"><a href="#语法格式二：有一个参数，无返回值-如果有一个参数，参数的括号可以不写" class="headerlink" title="语法格式二：有一个参数，无返回值 ,如果有一个参数，参数的括号可以不写"></a>语法格式二：有一个参数，无返回值 ,如果有一个参数，参数的括号可以不写</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Consumer&lt;String&gt; com = (x) -&gt; System.out.println(x);</span><br><span class="line">com.accept(<span class="string">"I AM Consumer"</span>);</span><br><span class="line"><span class="comment">//参数不带括号</span></span><br><span class="line">Consumer&lt;String&gt; com = x -&gt; System.out.println(x);</span><br><span class="line">com.accept(<span class="string">"I AM Consumer"</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="语法格式三：有两个以上的参数，有返回值，并且Lambda体中有多条语句，多条语句用-括起来"><a href="#语法格式三：有两个以上的参数，有返回值，并且Lambda体中有多条语句，多条语句用-括起来" class="headerlink" title="语法格式三：有两个以上的参数，有返回值，并且Lambda体中有多条语句，多条语句用{}括起来"></a>语法格式三：有两个以上的参数，有返回值，并且Lambda体中有多条语句，多条语句用{}括起来</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Comparator&lt;Integer&gt; com = (x,y) -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"我有两个参数和多条语句"</span>);</span><br><span class="line">    <span class="keyword">return</span> Integer.compare(x,y);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h6 id="语法格式四：若Lambda体中只有一条语句，return-和-大括号都可以不写"><a href="#语法格式四：若Lambda体中只有一条语句，return-和-大括号都可以不写" class="headerlink" title="语法格式四：若Lambda体中只有一条语句，return 和 大括号都可以不写"></a>语法格式四：若Lambda体中只有一条语句，return 和 大括号都可以不写</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Comparator&lt;Integer&gt; com = (x,y) -&gt;  Integer.compare(x,y);</span><br></pre></td></tr></table></figure>
+
+<h6 id="语法格式五：Lambda表达式的参数列表的数据类型可以写，因为JVM编译器可以根据上下文推断出参数的数据类型，即“类型推断”"><a href="#语法格式五：Lambda表达式的参数列表的数据类型可以写，因为JVM编译器可以根据上下文推断出参数的数据类型，即“类型推断”" class="headerlink" title="语法格式五：Lambda表达式的参数列表的数据类型可以写，因为JVM编译器可以根据上下文推断出参数的数据类型，即“类型推断”"></a>语法格式五：Lambda表达式的参数列表的数据类型可以写，因为JVM编译器可以根据上下文推断出参数的数据类型，即“类型推断”</h6><h5 id="Java8-内置的四大核心函数式接口"><a href="#Java8-内置的四大核心函数式接口" class="headerlink" title="Java8 内置的四大核心函数式接口"></a>Java8 内置的四大核心函数式接口</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Consumer&lt;T&gt;:消费型接口</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(T t)</span></span></span><br><span class="line"><span class="function">Supplier&lt;T&gt;:供给型接口</span></span><br><span class="line"><span class="function">    T <span class="title">get</span><span class="params">()</span></span></span><br><span class="line"><span class="function">Function&lt;T,R&gt;: 函数型接口</span></span><br><span class="line"><span class="function">    R <span class="title">apply</span><span class="params">(T t)</span></span></span><br><span class="line"><span class="function">Predicate&lt;T&gt;: 断言型接口</span></span><br><span class="line"><span class="function">    <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="方法引用：如果Lambda-体中的有方法已经实现了，我们可以使用“方法引用”-可以理解为方法引用是Lambda表达式的另一种表现形式"><a href="#方法引用：如果Lambda-体中的有方法已经实现了，我们可以使用“方法引用”-可以理解为方法引用是Lambda表达式的另一种表现形式" class="headerlink" title="方法引用：如果Lambda 体中的有方法已经实现了，我们可以使用“方法引用”(可以理解为方法引用是Lambda表达式的另一种表现形式)"></a>方法引用：如果Lambda 体中的有方法已经实现了，我们可以使用“方法引用”(可以理解为方法引用是Lambda表达式的另一种表现形式)</h5><p>三种语法格式：<code>对象::实例方法名</code>  <code>类::静态方法名</code>    <code>类::实例方法名</code> </p>
+<p><code>引用方法的参数列表和返回值要和函数式接口的一致</code></p>
+<p><code>如果Lambda参数列表中的第一个参数时实例方法的调用者，而第二个参数时实例方法的参数时，可以使用ClassName::MethodName(</code> 类 : : 实例方法名<code>)</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">      <span class="comment">//对象::实例方法名</span></span><br><span class="line">      Consumer&lt;String&gt; consumer = System.out::println;</span><br><span class="line"><span class="comment">//类::静态方法名</span></span><br><span class="line">      consumer.accept(<span class="string">"方法引用"</span>);</span><br><span class="line">      Comparator&lt;Integer&gt; com = Integer::compare;</span><br><span class="line"><span class="comment">//类::实例方法名</span></span><br><span class="line">      BiConsumer&lt;String,String&gt; bp = (x,y) -&gt;x.equals(y);</span><br><span class="line">      BiConsumer&lt;String,String&gt; bp2 = String::equals;</span><br></pre></td></tr></table></figure>
+
+<h5 id="构造器引用-格式：ClassName-new"><a href="#构造器引用-格式：ClassName-new" class="headerlink" title="构造器引用  格式：ClassName::new"></a>构造器引用  格式：<code>ClassName::new</code></h5><p><code>需要调用的构造器的参数列表要与函数式接口中抽象方法的参数列表保持一致</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> high;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age, String name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age, String name, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.high = high;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用无参构造器创建对象</span></span><br><span class="line">Supplier&lt;Person&gt; fun1 = () -&gt; <span class="keyword">new</span> Person();</span><br><span class="line">Person person = fun1.get();</span><br><span class="line">Supplier&lt;Person&gt; fun2 = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person2 = fun2.get();</span><br><span class="line"><span class="comment">//调用一个参数创建对象</span></span><br><span class="line">Function&lt;Integer,Person&gt; fun3 = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person3 = fun3.apply(<span class="number">12</span>);</span><br><span class="line"><span class="comment">//调用两个参数创建对象</span></span><br><span class="line">BiFunction&lt;Integer,String,Person&gt; fun4 = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person4 = fun4.apply(<span class="number">12</span>,<span class="string">"HHH"</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="数组引用：Type-new"><a href="#数组引用：Type-new" class="headerlink" title="数组引用：Type[]::new"></a>数组引用：<code>Type[]::new</code></h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">      Function&lt;Integer,String[]&gt; fun5 = (x) -&gt; <span class="keyword">new</span> String[x];</span><br><span class="line">      String[] strs = fun5.apply(<span class="number">10</span>);</span><br><span class="line"><span class="comment">//数组引用</span></span><br><span class="line">      Function&lt;Integer,String[]&gt; fun6 = String[]::<span class="keyword">new</span>;</span><br><span class="line">      String[] strs2 = fun6.apply(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>Lambda表达式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java之NIO</title>
     <url>/2020/01/19/Java%E4%B9%8BNIO/</url>
     <content><![CDATA[<h5 id="NIO和IO的区别"><a href="#NIO和IO的区别" class="headerlink" title="NIO和IO的区别"></a>NIO和IO的区别</h5><ul>
@@ -59,10 +97,10 @@
 </ul>
 <h5 id="编码与解码"><a href="#编码与解码" class="headerlink" title="编码与解码"></a>编码与解码</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Charset cset = Charset.forName(<span class="string">"GBK"</span>);</span><br><span class="line"><span class="comment">//字符到字节数组 编码</span></span><br><span class="line">CharsetEncoder encoder = cset.newEncoder();</span><br><span class="line"><span class="comment">//字节数组到字符 解码</span></span><br><span class="line">CharsetDecoder decoder = cset.newDecoder();</span><br><span class="line">CharBuffer cbuf = CharBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">cbuf.put(<span class="string">"张家口检索"</span>);</span><br><span class="line">cbuf.flip();</span><br><span class="line">ByteBuffer buf = encoder.encode(cbuf);</span><br><span class="line"><span class="comment">//buf.flip();</span></span><br><span class="line">CharBuffer cbuf1 = decoder.decode(buf);</span><br><span class="line">System.out.println(cbuf1.toString());</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>-java -NIO</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>-java -NIO</tag>
+        <tag>NIO</tag>
       </tags>
   </entry>
   <entry>
@@ -150,10 +188,10 @@
 </tbody></table>
 ]]></content>
       <categories>
-        <category>日常</category>
+        <category>小知识</category>
       </categories>
       <tags>
-        <tag>-MarkDown -基础知识</tag>
+        <tag>MarkDown</tag>
       </tags>
   </entry>
   <entry>
