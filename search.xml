@@ -321,7 +321,14 @@
   <entry>
     <title>NLP_Few_Shot_Learning_01</title>
     <url>/2021/01/01/NLP-Few-Shot-Learning-01/</url>
-    <content><![CDATA[<object data="./NLP-Few-Shot-Learning-01/NLP_Few_Shot_Learning_01.pdf" type="application/pdf" width="100%" height="100%">]]></content>
+    <content><![CDATA[
+
+	<div class="row">
+    <embed src="./NLP-Few-Shot-Learning-01/NLP_Few_Shot_Learning_01.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+]]></content>
       <tags>
         <tag>NLP</tag>
       </tags>
